@@ -235,8 +235,8 @@ func SelfCert(lg *zap.Logger, dirpath string, hosts []string, additionalUsages .
 // Previously,
 // 1. Server has non-empty (*tls.Config).Certificates on client hello
 // 2. Server calls (*tls.Config).GetCertificate iff:
-//    - Server's (*tls.Config).Certificates is not empty, or
-//    - Client supplies SNI; non-empty (*tls.ClientHelloInfo).ServerName
+//   - Server's (*tls.Config).Certificates is not empty, or
+//   - Client supplies SNI; non-empty (*tls.ClientHelloInfo).ServerName
 //
 // When (*tls.Config).Certificates is always populated on initial handshake,
 // client is expected to provide a valid matching SNI to pass the TLS
@@ -383,7 +383,7 @@ func (info TLSInfo) ServerConfig() (*tls.Config, error) {
 	}
 
 	// "h2" NextProtos is necessary for enabling HTTP2 for go's HTTP server
-	cfg.NextProtos = []string{"h2"}
+	cfg.NextProtos = []string{"http/1.1", "h2"}
 
 	return cfg, nil
 }
